@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { d } from './delay'
+import { DotField } from './dot-field'
 import { usePrefersReducedMotion } from './motion'
 
 type Company = { name: string; logo: string; mark: string }
@@ -58,6 +59,7 @@ export function LogoWall() {
   // Companies waiting off the wall, oldest first, so every name gets a turn.
   const waiting = useRef(companies.map((_, i) => i).slice(TILES))
   const hovered = useRef<number | null>(null)
+  const [hoveredTile, setHoveredTile] = useState<number | null>(null)
 
   useEffect(() => {
     const el = listRef.current
@@ -99,10 +101,17 @@ export function LogoWall() {
             key={i}
             className="r border-r border-b border-line"
             style={d(wave * 80)}
-            onPointerEnter={() => (hovered.current = i)}
-            onPointerLeave={() => (hovered.current = null)}
+            onPointerEnter={() => {
+              hovered.current = i
+              setHoveredTile(i)
+            }}
+            onPointerLeave={() => {
+              hovered.current = null
+              setHoveredTile(null)
+            }}
           >
             <div className="group relative h-[158px] overflow-hidden font-mono text-[12px] leading-[1.3] transition-colors duration-500 hover:bg-white/[0.025]">
+              <DotField active={hoveredTile === i} />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-px origin-center scale-x-0 bg-brand transition-transform duration-500 ease-(--ease-expo) group-hover:scale-x-100" />
               {previous && <TileFace key={`${tile.swaps}-out`} company={previous} state="out" />}
               <TileFace key={`${tile.swaps}-in`} company={current} state={tile.swaps ? 'in' : 'static'} />
