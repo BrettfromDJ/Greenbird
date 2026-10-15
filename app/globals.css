@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+/*
+ * The design is set in three licensed faces (Brockmann, Suisse Intl, PP
+ * Editorial New). They're listed first in each stack so they take over as soon
+ * as the font files are added (e.g. via next/font/local); until then the open
+ * fallbacks loaded in layout.tsx stand in.
+ */
+@theme {
+  --color-ink: #020905;
+  --color-hero: #030e08;
+  --color-brand: #007a3f;
+  --color-line: #202d27;
+  --color-outline: #424544;
+  --color-card-pe: #00160b;
+  --color-card-mln: #051705;
+
+  --font-display: 'Brockmann', 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Suisse Intl', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'PP Editorial New', 'Newsreader Variable', ui-serif, Georgia, serif;
+  --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-numeric: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --font-weight-book: 450;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-ink);
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  /* Frosted panel used by the dashboard preview, holding tiles and round icon buttons. */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    background-image: linear-gradient(
+      var(--glass-angle, 135deg),
+      rgb(250 250 250 / 0.12) 3.19%,
+      rgb(250 250 250 / 0) 103.55%
+    );
+    backdrop-filter: blur(100px);
+    box-shadow:
+      inset -2.113px -2.113px 2.113px 0 rgb(255 255 255 / 0.05),
+      inset 1.056px 1.056px 1.056px 0 rgb(255 255 255 / 0.15);
+  }
+
+  .hairline {
+    height: 1px;
+    background-color: rgb(255 255 255 / 0.2);
+  }
+}
