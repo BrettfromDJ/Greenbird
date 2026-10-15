@@ -22,6 +22,8 @@
   --font-numeric: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
 
   --font-weight-book: 450;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
@@ -56,5 +58,342 @@
   .hairline {
     height: 1px;
     background-color: rgb(255 255 255 / 0.2);
+  }
+}
+
+/* ───────────────────────────── Motion ─────────────────────────────
+ * Two triggers share one set of keyframes:
+ *  - .intro / .intro-line / .draw-x play on page load, staggered by --d.
+ *  - .r / .r-line / .r-draw play when their <Reveal> scope scrolls into view.
+ * Reveal content is only hidden once JS has armed it below the fold, so the
+ * server-rendered page is complete without scripts.
+ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 18px));
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes dash-in {
+  from {
+    opacity: 0;
+    transform: perspective(1800px) translateY(110px) rotateX(18deg) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.025);
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translate3d(4%, -5%, 0) scale(1.12);
+  }
+}
+
+@keyframes shine {
+  from {
+    transform: translateX(-160%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(360%) skewX(-20deg);
+  }
+}
+
+@keyframes shine-hover {
+  from {
+    transform: translateX(-160%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(360%) skewX(-20deg);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 rgb(0 200 100 / 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 7px rgb(0 200 100 / 0);
+  }
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes row-out {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+    filter: blur(5px);
+  }
+}
+
+@keyframes tick-up {
+  from {
+    color: #3ee08f;
+    text-shadow: 0 0 12px rgb(62 224 143 / 0.6);
+  }
+}
+
+@keyframes tick-down {
+  from {
+    color: #ff7a7a;
+    text-shadow: 0 0 12px rgb(255 122 122 / 0.5);
+  }
+}
+
+@keyframes sheen {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes tile-shimmer {
+  from {
+    background-position: 160% 0;
+  }
+  to {
+    background-position: -60% 0;
+  }
+}
+
+@layer utilities {
+  .intro {
+    animation: rise 1.1s var(--ease-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  .intro-fade {
+    animation: fade-in 1.4s ease-out both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  .draw-x {
+    transform-origin: center;
+    animation: draw-x 1.4s var(--ease-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  .dash-in {
+    transform-origin: 50% 0;
+    animation: dash-in 1.6s var(--ease-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  /* Headline lines slide up from behind their own mask. */
+  .line-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+
+  .line-mask > span {
+    display: block;
+  }
+
+  .intro-line {
+    animation: line-up 1.2s var(--ease-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  /* Once the load sequence has played, pin it in its final state so a resize
+     across a breakpoint (which re-displays parts of the hero) doesn't replay it. */
+  [data-intro-done] :is(.intro, .intro-fade, .intro-line, .draw-x, .dash-in) {
+    animation: none;
+  }
+
+  [data-armed]:not([data-in]) :is(.r, .r-line, .r-draw) {
+    opacity: 0;
+  }
+
+  [data-in] .r {
+    animation: rise 1s var(--ease-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  [data-in] .r-line {
+    animation: line-up 1.1s var(--ease-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  [data-in] .r-draw {
+    transform-origin: left;
+    animation: draw-x 1.4s var(--ease-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  /* Hero backdrop */
+  .hero-dots {
+    transform-origin: 50% 80%;
+    animation: breathe 9s ease-in-out infinite;
+  }
+
+  .hero-aurora {
+    background:
+      radial-gradient(38% 34% at 22% 78%, rgb(0 122 63 / 0.2), transparent 70%),
+      radial-gradient(34% 42% at 90% 82%, rgb(20 120 60 / 0.22), transparent 70%);
+    animation: drift 16s ease-in-out infinite alternate;
+  }
+
+  .hero-spot {
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    -webkit-mask-image: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 72%);
+    mask-image: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 72%);
+  }
+
+  [data-spot] > .hero-spot {
+    opacity: 1;
+  }
+
+  .hero-spot-grid {
+    background-image: radial-gradient(circle, rgb(255 255 255 / 0.22) 1.1px, transparent 1.6px);
+    background-size: 12px 12px;
+  }
+
+  .hero-spot-dots {
+    filter: brightness(2.6) saturate(1.4);
+  }
+
+  /* Buttons get a light sweep: once after the intro on the hero CTA, and on hover. */
+  .btn-shine::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 35%;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.28), transparent);
+    transform: translateX(-160%) skewX(-20deg);
+    pointer-events: none;
+  }
+
+  .btn-shine-auto::before {
+    animation: shine 1.2s var(--ease-expo) 1.9s both;
+  }
+
+  .btn-shine:hover::before {
+    animation: shine-hover 0.9s var(--ease-expo) both;
+  }
+
+  .bob {
+    animation: bob 2.6s ease-in-out infinite;
+  }
+
+  .live-dot {
+    animation: pulse-dot 1.8s ease-out infinite;
+  }
+
+  /* Dashboard */
+  .row-in {
+    animation: row-in 0.7s var(--ease-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  .row-out {
+    animation: row-out 0.45s ease-in both;
+  }
+
+  .tick-up {
+    animation: tick-up 1.6s ease-out;
+  }
+
+  .tick-down {
+    animation: tick-down 1.6s ease-out;
+  }
+
+  .bar-sheen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.16) 50%, transparent 70%);
+    animation: sheen 6s ease-in-out 2.6s infinite;
+    transform: translateX(-120%);
+  }
+
+  .tile-shimmer {
+    background-image: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.1) 50%, transparent 65%);
+    background-size: 250% 100%;
+    animation: tile-shimmer 1.1s ease-out both;
+    animation-delay: var(--d, 0ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
