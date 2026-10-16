@@ -32,7 +32,18 @@
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Deep-green palette for /v2. Only surfaces and rules change; accents are shared. */
+.theme-v2 {
+  --color-ink: #011207;
+  --color-hero: #03250f;
+  --color-line: #13261a;
+}
+
 @layer base {
+  html:has(.theme-v2) {
+    background-color: #011207;
+  }
+
   html {
     background-color: var(--color-ink);
     color: #fff;
