@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import '@fontsource-variable/inter'
-import '@fontsource-variable/manrope'
+import '@fontsource-variable/inter-tight'
 import '@fontsource-variable/newsreader'
 import '@fontsource/roboto-mono/400.css'
 import './globals.css'

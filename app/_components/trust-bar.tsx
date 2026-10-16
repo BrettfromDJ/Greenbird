@@ -19,7 +19,7 @@ export function TrustBar() {
             </li>
           ))}
         </ul>
-        <div className="hairline r-draw mt-8" style={d(150)} />
+        <div className="r-draw mt-8 h-px bg-line" style={d(150)} />
       </Reveal>
     </Container>
   )

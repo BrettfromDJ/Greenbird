@@ -13,7 +13,7 @@ export function Hero() {
 
       <div className="relative pt-[26px]">
         <SiteNav />
-        <div className="hairline draw-x mt-8" style={d(250)} />
+        <div className="draw-x mt-8 h-px bg-line-hero" style={d(250)} />
 
         <div className="flex flex-col items-center text-center">
           <Eyebrow className="intro mt-20 text-brand" style={d(350)}>

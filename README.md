@@ -9,11 +9,11 @@ pnpm dev
 
 ## Fonts
 
-The design uses three licensed faces: **Brockmann** (display), **Suisse Intl** (body)
-and **PP Editorial New** (the dashboard title). They're first in each font stack in
-`app/globals.css`, so they take over once the font files are added (for example
-with `next/font/local`). Until then, open stand-ins load from Fontsource: Manrope,
-Inter and Newsreader. Roboto Mono is used as designed.
+Display type is **Inter Tight**, loaded from Fontsource. Body copy and the
+dashboard title use two licensed faces, **Suisse Intl** and **PP Editorial New**.
+They're first in their font stacks in `app/globals.css`, so they take over once
+the font files are added (for example with `next/font/local`). Until then, Inter
+and Newsreader stand in. Roboto Mono is used as designed.
 
 ## Assets
 

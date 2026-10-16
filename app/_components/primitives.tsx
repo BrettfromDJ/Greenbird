@@ -31,6 +31,7 @@ export function DisplayHeading({
   lead,
   rest,
   dimLead = false,
+  tone = 'light',
   className = '',
   as: Tag = 'h2',
   motion = 'reveal',
@@ -39,6 +40,8 @@ export function DisplayHeading({
   lead: string
   rest: string
   dimLead?: boolean
+  /** `light` text for dark surfaces, `dark` text for the sage band. */
+  tone?: 'light' | 'dark'
   className?: string
   as?: 'h1' | 'h2'
   motion?: 'intro' | 'reveal'
@@ -47,7 +50,7 @@ export function DisplayHeading({
   const line = motion === 'intro' ? 'intro-line' : 'r-line'
   return (
     <Tag
-      className={`font-display text-[36px] leading-[1.1] font-semibold tracking-[-0.01em] text-white sm:text-[52px] sm:leading-[58px] ${className}`}
+      className={`font-display text-[36px] leading-[1.1] font-semibold sm:text-[52px] ${tone === 'dark' ? 'text-on-light' : 'text-white'} sm:leading-[58px] ${className}`}
     >
       <span className="line-mask">
         <span className={`${line} ${dimLead ? 'text-white/60' : ''}`} style={d(delay)}>
@@ -83,7 +86,7 @@ export function PrimaryButton({
   return (
     <Link
       href={href}
-      className={`btn-shine group relative inline-flex shrink-0 items-center overflow-hidden rounded-[6px] bg-brand text-[14px] leading-none font-book text-white transition-[background-color,box-shadow] duration-300 hover:bg-[#008c48] hover:shadow-[0_8px_30px_-6px_rgb(0_122_63/0.7)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${autoShine ? 'btn-shine-auto' : ''} ${buttonSizes[size]}`}
+      className={`btn-shine group relative inline-flex shrink-0 items-center overflow-hidden rounded-[6px] bg-brand text-[14px] leading-none font-book text-on-brand transition-[background-color,box-shadow] duration-300 hover:bg-brand-hover hover:shadow-[0_8px_30px_-6px_rgb(75_222_127/0.55)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${autoShine ? 'btn-shine-auto' : ''} ${buttonSizes[size]}`}
     >
       <span className="relative">{children}</span>
       <Image

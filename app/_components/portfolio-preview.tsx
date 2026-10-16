@@ -117,9 +117,8 @@ export function PortfolioPreview() {
   return (
     <div
       aria-hidden
-      className="relative h-[657px] w-[961px] overflow-hidden rounded-[4px] text-left"
+      className="relative h-[657px] w-[961px] overflow-hidden rounded-[4px] bg-panel text-left"
       style={{
-        backgroundImage: 'linear-gradient(145.62deg, rgb(4 22 12) 3.19%, rgb(3 14 8) 103.55%)',
         boxShadow:
           'inset -2.113px -2.113px 2.113px 0 rgb(255 255 255 / 0.05), inset 1.056px 1.056px 1.056px 0 rgb(255 255 255 / 0.15)',
       }}
@@ -153,7 +152,7 @@ export function PortfolioPreview() {
           Allocations
         </p>
         <div
-          className="glass intro mt-[21px] ml-[3px] flex h-[184px] w-[384px] overflow-hidden rounded-[4px]"
+          className="glass glass-tint intro mt-[21px] ml-[3px] flex h-[184px] w-[384px] overflow-hidden rounded-[4px]"
           style={{ '--glass-angle': '154.38deg', ...d(1500) } as React.CSSProperties}
         >
           <div
@@ -178,7 +177,7 @@ export function PortfolioPreview() {
       <div className="absolute top-[62px] left-[590px] w-[311px]">
         <p className="intro flex items-center gap-2 font-mono text-[12px] leading-none uppercase" style={d(1400)}>
           Holdings
-          <span className="live-dot size-[5px] rounded-full bg-[#00c864]" />
+          <span className="live-dot size-[5px] rounded-full bg-brand" />
         </p>
         <ul className="mt-6">
           {slots.map((poolIndex, slot) => {
@@ -195,7 +194,7 @@ export function PortfolioPreview() {
                   className={`flex h-[50px] gap-3 ${leaving === slot ? 'row-out' : ready ? 'row-in' : 'opacity-0'}`}
                   style={initial ? d(slot * 140) : undefined}
                 >
-                  <div className="glass size-[50px] shrink-0 rounded-[4px]">
+                  <div className="glass glass-tint size-[50px] shrink-0 rounded-[4px]">
                     <div className="tile-shimmer absolute inset-0 rounded-[4px]" style={initial ? d(slot * 140 + 150) : undefined} />
                   </div>
                   <div className="min-w-0 flex-1 pt-[7px]">

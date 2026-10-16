@@ -56,7 +56,7 @@ export function DotField({ active }: { active: boolean }) {
         const angle = Math.atan2(dot.y - cy, dot.x - cx)
         const beam = Math.pow(0.5 + 0.5 * Math.cos(angle - sweep), 6)
         const alpha = Math.min(MAX_ALPHA, dot.base * (0.35 + 0.65 * twinkle) + beam * 0.35)
-        ctx.fillStyle = `rgba(70, 214, 128, ${alpha.toFixed(3)})`
+        ctx.fillStyle = `rgba(75, 222, 127, ${alpha.toFixed(3)})`
         ctx.beginPath()
         ctx.arc(dot.x, dot.y, RADIUS, 0, Math.PI * 2)
         ctx.fill()
