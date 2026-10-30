@@ -31,6 +31,7 @@ export function DisplayHeading({
   lead,
   rest,
   dimLead = false,
+  dimRest = false,
   tone = 'light',
   className = '',
   as: Tag = 'h2',
@@ -40,6 +41,7 @@ export function DisplayHeading({
   lead: string
   rest: string
   dimLead?: boolean
+  dimRest?: boolean
   /** `light` text for dark surfaces, `dark` text for the sage band. */
   tone?: 'light' | 'dark'
   className?: string
@@ -58,7 +60,7 @@ export function DisplayHeading({
         </span>
       </span>
       <span className="line-mask">
-        <span className={line} style={d(delay + 120)}>
+        <span className={`${line} ${dimRest ? 'text-white/60' : ''}`} style={d(delay + 120)}>
           {rest}
         </span>
       </span>

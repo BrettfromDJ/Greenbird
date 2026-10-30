@@ -25,6 +25,7 @@
   --font-sans: 'Suisse Intl', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, monospace;
   --font-numeric: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-ui: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
 
   --font-weight-book: 450;
 
@@ -462,4 +463,38 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Contact page map: light tiles blended over the hero green, as in the design.
+ * Kept outside @layer so it overrides leaflet.css, which is unlayered. */
+.office-map .leaflet-container {
+  background: transparent;
+  font-family: var(--font-mono);
+}
+
+.office-map-tint {
+  position: absolute;
+  inset: -5000px;
+  background: var(--color-hero);
+}
+
+.office-map .leaflet-container .leaflet-control-attribution {
+  background: rgb(3 37 15 / 0.7);
+  color: rgb(255 255 255 / 0.45);
+  font-size: 8px;
+  line-height: 1.4;
+  padding: 0 4px;
+}
+
+.office-map .leaflet-container .leaflet-control-attribution a {
+  color: rgb(255 255 255 / 0.6);
+}
+
+.office-pin span {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--color-brand);
+  border: 2px solid var(--color-hero);
+  animation: pulse-dot 1.8s ease-out infinite;
 }

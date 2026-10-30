@@ -12,14 +12,14 @@ const columns: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Investment solutions',
     links: [
-      { label: 'Private Equity', href: '#private-equity' },
-      { label: 'Market-Linked Notes', href: '#market-linked-notes' },
+      { label: 'Private Equity', href: '/#private-equity' },
+      { label: 'Market-Linked Notes', href: '/#market-linked-notes' },
     ],
   },
   {
     title: 'Account',
     links: [
-      { label: 'Contact', href: '#contact' },
+      { label: 'Contact', href: '/contact' },
       { label: 'Log in', href: '/login' },
     ],
   },
@@ -38,8 +38,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
 ]
 
 const underline = 'underline underline-offset-2 transition-opacity hover:opacity-70'
-const linkHover =
-  'relative after:absolute after:inset-x-0 after:bottom-1.5 after:h-px after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-500 after:ease-(--ease-expo) hover:after:scale-x-100'
+const linkHover = 'transition-colors duration-300 hover:text-brand'
 
 function FooterAnchor({ link, className = '' }: { link: FooterLink; className?: string }) {
   if (link.external) {
@@ -63,7 +62,7 @@ function FooterAnchor({ link, className = '' }: { link: FooterLink; className?: 
  */
 export function SiteFooter() {
   return (
-    <footer id="contact" className="scroll-mt-8">
+    <footer>
       <Reveal className="grid lg:grid-cols-2">
         {/* Get started */}
         <div className="border border-line-footer px-5 pt-[47px] pb-16 sm:px-[52px] lg:min-h-[381px] lg:pb-[74px]">
@@ -84,7 +83,7 @@ export function SiteFooter() {
             Private equity and market-linked notes through a single account.
           </p>
           <div className="r mt-[30px]" style={d(420)}>
-            <PrimaryButton href="#investment-solutions" size="lg">
+            <PrimaryButton href="/#investment-solutions" size="lg">
               Explore the possibilities
             </PrimaryButton>
           </div>

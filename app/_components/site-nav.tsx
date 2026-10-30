@@ -4,10 +4,10 @@ import { d } from './delay'
 import { PrimaryButton } from './primitives'
 
 const links = [
-  { label: 'Private Equity', href: '#private-equity' },
-  { label: 'Market-Linked Notes', href: '#market-linked-notes' },
-  { label: 'Team', href: '#team' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Private Equity', href: '/#private-equity' },
+  { label: 'Market-Linked Notes', href: '/#market-linked-notes' },
+  { label: 'Team', href: '/#team' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export function SiteNav() {
@@ -24,10 +24,7 @@ export function SiteNav() {
         <ul className="flex items-center gap-9 text-[14px] leading-[1.3]">
           {links.map((link) => (
             <li key={link.label}>
-              <Link
-                href={link.href}
-                className="relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-500 after:ease-(--ease-expo) hover:after:scale-x-100"
-              >
+              <Link href={link.href} className="transition-colors duration-300 hover:text-brand">
                 {link.label}
               </Link>
             </li>
@@ -36,10 +33,10 @@ export function SiteNav() {
       </nav>
 
       <div className="flex items-center gap-9 justify-self-end">
-        <Link href="/login" prefetch={false} className="hidden text-[14px] leading-[1.3] transition-opacity hover:opacity-70 sm:block">
+        <Link href="/login" prefetch={false} className="hidden text-[14px] leading-[1.3] transition-colors duration-300 hover:text-brand sm:block">
           Login
         </Link>
-        <PrimaryButton href="#contact">Contact us</PrimaryButton>
+        <PrimaryButton href="/contact">Contact us</PrimaryButton>
       </div>
     </header>
   )
