@@ -7,7 +7,7 @@ import { SiteNav } from './site-nav'
 
 export function Hero() {
   return (
-    <section className="relative mx-2 mt-2 overflow-hidden rounded-[10px] bg-hero px-4 pb-16 sm:mx-5 sm:mt-5 sm:px-8 lg:h-[984px] lg:pb-0">
+    <section className="relative mx-2 mt-2 overflow-hidden rounded-[10px] bg-hero px-4 pb-16 sm:mx-5 sm:mt-5 sm:px-8 lg:pb-20">
       <HeroBackdrop />
       <IntroDone />
 
@@ -39,12 +39,7 @@ export function Hero() {
             Investment opportunities subject to eligibility.
           </p>
 
-          {/* Hidden below lg with visibility, not display: toggling display would
-              restart every animation inside the dashboard. */}
-          <div
-            className="dash-in mt-[63px] max-lg:pointer-events-none max-lg:invisible max-lg:absolute max-lg:top-0"
-            style={d(950)}
-          >
+          <div className="dash-in mt-12 flex w-full justify-center lg:mt-[63px]" style={d(950)}>
             <PortfolioPreview />
           </div>
         </div>

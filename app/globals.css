@@ -22,6 +22,14 @@
   --color-card-pe: #1f3628;
   --color-card-mln: #0cb666;
 
+  /* Portfolio preview card in the hero */
+  --color-card: #171a18;
+  --color-card-border: #272a28;
+  --color-card-rule: #232524;
+  --color-card-muted: #747674;
+  --color-alloc-pe: #4ba562;
+  --color-alloc-mln: #4ba3e3;
+
   --font-display: 'Inter Tight Variable', 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Suisse Intl', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'PP Editorial New', 'Newsreader Variable', ui-serif, Georgia, serif;
