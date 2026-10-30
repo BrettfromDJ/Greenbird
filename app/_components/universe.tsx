@@ -35,7 +35,7 @@ export function Universe() {
                 className="group relative flex h-[73px] items-center justify-center gap-[25px] overflow-hidden border border-line text-[14px] leading-none text-brand lg:h-[72px] lg:border-t-0"
               >
                 <span className="absolute inset-0 origin-left scale-x-0 bg-brand/10 transition-transform duration-700 ease-(--ease-expo) group-hover:scale-x-100" />
-                <span className="relative">Explore the possibilities</span>
+                <span className="relative">See the full universe</span>
                 <Image
                   src="/images/icon-arrow-up-right-brand.svg"
                   alt=""

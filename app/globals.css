@@ -7,16 +7,17 @@
  * next/font/local). Until then the open fallbacks loaded in layout.tsx stand in.
  */
 @theme {
-  --color-ink: #161b19;
-  --color-hero: #070d0a;
+  --color-ink: #011207;
+  --color-hero: #03250f;
   --color-panel: #14251d;
   --color-brand: #4bde7f;
   --color-brand-hover: #6fe89a;
   --color-on-brand: #1a1a1a;
   --color-on-light: #070d0a;
   --color-sage: #acc1b9;
-  --color-line: #2a2b2b;
+  --color-line: #13261a;
   --color-line-hero: #202d27;
+  --color-line-footer: #0b2815;
   --color-outline: #424544;
   --color-card-pe: #1f3628;
   --color-card-mln: #0cb666;
@@ -32,18 +33,7 @@
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Deep-green palette for /v2. Only surfaces and rules change; accents are shared. */
-.theme-v2 {
-  --color-ink: #011207;
-  --color-hero: #03250f;
-  --color-line: #13261a;
-}
-
 @layer base {
-  html:has(.theme-v2) {
-    background-color: #011207;
-  }
-
   html {
     background-color: var(--color-ink);
     color: #fff;

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { d } from './delay'
+import { Disclosures } from './disclosures'
 import { Reveal } from './motion'
 import { Container, DisplayHeading, Eyebrow } from './primitives'
 
@@ -124,6 +125,8 @@ export function InvestmentSolutions() {
             </article>
           ))}
         </Reveal>
+
+        <Disclosures />
       </Container>
     </section>
   )
