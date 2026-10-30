@@ -22,14 +22,6 @@
   --color-card-pe: #1f3628;
   --color-card-mln: #0cb666;
 
-  /* Portfolio preview card in the hero */
-  --color-card: #171a18;
-  --color-card-border: #272a28;
-  --color-card-rule: #232524;
-  --color-card-muted: #747674;
-  --color-alloc-pe: #4ba562;
-  --color-alloc-mln: #4ba3e3;
-
   --font-display: 'Inter Tight Variable', 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Suisse Intl', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'PP Editorial New', 'Newsreader Variable', ui-serif, Georgia, serif;
@@ -441,6 +433,17 @@
     inset: 0;
     background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.16) 50%, transparent 70%);
     animation: sheen 6s ease-in-out 2.6s infinite;
+    transform: translateX(-120%);
+  }
+
+  /* Slow diagonal light pass across the hero's portfolio card. */
+  .card-sheen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.05) 50%, transparent 65%);
+    animation: sheen 9s ease-in-out 3s infinite;
     transform: translateX(-120%);
   }
 

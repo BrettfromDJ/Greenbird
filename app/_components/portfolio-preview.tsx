@@ -6,12 +6,12 @@ import { d } from './delay'
 import { useCountUp, usePrefersReducedMotion } from './motion'
 
 const allocations = [
-  { label: 'Private equity', share: 63.8, color: 'var(--color-alloc-pe)', dot: 'bg-alloc-pe' },
-  { label: 'Market-linked notes', share: 36.2, color: 'var(--color-alloc-mln)', dot: 'bg-alloc-mln' },
+  { label: 'Private equity', share: 63.8, color: 'var(--color-brand)', dot: 'bg-brand' },
+  { label: 'Market-linked notes', share: 36.2, color: 'var(--color-sage)', dot: 'bg-sage' },
 ]
 
-/** A holding's tile: a logo on a dark or light chip, or a short issuer code. */
-type Tile = { kind: 'logo'; src: string; light?: boolean } | { kind: 'text'; label: string; light?: boolean }
+/** A holding's tile: a logo or a short issuer code on a glass chip. */
+type Tile = { kind: 'logo'; src: string } | { kind: 'text'; label: string }
 
 type Holding = { name: string; detail: string; price: number | null; tile: Tile }
 
@@ -20,7 +20,7 @@ type Holding = { name: string; detail: string; price: number | null; tile: Tile 
 // Shield AI and Saronic use monograms until their logo files are supplied.
 const pool: Holding[] = [
   { name: 'Anduril Industries', detail: 'Private equity', price: 135.25, tile: { kind: 'logo', src: '/images/logo-anduril.svg' } },
-  { name: 'Shield AI', detail: 'Private equity', price: 171.83, tile: { kind: 'text', label: 'S', light: true } },
+  { name: 'Shield AI', detail: 'Private equity', price: 171.83, tile: { kind: 'text', label: 'S' } },
   { name: 'Autocallable note', detail: '3-yr worst-of autocallable · BNP Paribas', price: null, tile: { kind: 'text', label: 'BNP' } },
   { name: 'Saronic Technologies', detail: 'Private equity', price: 74.18, tile: { kind: 'text', label: 'S' } },
   { name: 'Buffered note', detail: '2-yr S&P 500 buffer · Goldman Sachs', price: null, tile: { kind: 'text', label: 'GS' } },
@@ -99,19 +99,24 @@ function useDashboardMotion() {
   return { ready, rotated, slots, leaving, prices, ticks }
 }
 
-const label = 'font-mono text-[11px] leading-none tracking-[0.2em] text-card-muted uppercase sm:tracking-[0.3em]'
+const label = 'font-mono text-[12px] leading-none text-white uppercase'
 
-/** Donut chart: segments grow from 12 o'clock in step with the count-up. */
+// Same inset edge highlights as the hero's other glass surfaces, plus a soft drop shadow.
+const glassEdge =
+  'shadow-[inset_-2.113px_-2.113px_2.113px_0_rgb(255_255_255/0.05),inset_1.056px_1.056px_1.056px_0_rgb(255_255_255/0.15),0_40px_90px_-30px_rgb(0_0_0/0.7)]'
+
+/** Donut chart: segments grow from 12 o'clock in step with the count-up, over a faint glass track. */
 function AllocationDonut({ progress }: { progress: number }) {
   const size = 88
-  const stroke = 6
+  const stroke = 7
   const r = (size - stroke) / 2
   const c = 2 * Math.PI * r
-  const gap = 2.5
+  const gap = 3
   // Each segment starts where the previous one's full share ends.
   const starts = allocations.map((_, i) => allocations.slice(0, i).reduce((sum, a) => sum + (a.share / 100) * c, 0))
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="size-[72px] shrink-0 -rotate-90 sm:size-[88px]">
+      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgb(255 255 255 / 0.06)" strokeWidth={stroke} />
       {allocations.map((a, i) => {
         const full = (a.share / 100) * c
         const len = Math.max(0, full * progress - gap)
@@ -125,6 +130,7 @@ function AllocationDonut({ progress }: { progress: number }) {
             fill="none"
             stroke={a.color}
             strokeWidth={stroke}
+            strokeLinecap="round"
             strokeDasharray={`${len} ${c}`}
             strokeDashoffset={-start}
           />
@@ -136,27 +142,20 @@ function AllocationDonut({ progress }: { progress: number }) {
 
 function HoldingTile({ tile }: { tile: Tile }) {
   return (
-    <div
-      className={`flex size-[35px] shrink-0 items-center justify-center rounded-[7px] border ${
-        tile.light
-          ? 'border-white bg-white text-black'
-          : tile.kind === 'logo'
-            ? 'border-card-border bg-[#292929]'
-            : 'border-card-border bg-[#202321] text-white/90'
-      }`}
-    >
+    <div className="glass glass-tint flex size-[40px] shrink-0 items-center justify-center rounded-[4px]">
       {tile.kind === 'logo' ? (
-        <Image src={tile.src} alt="" width={20} height={19} className="h-[19px] w-5 object-contain opacity-90" />
+        <Image src={tile.src} alt="" width={20} height={19} className="h-[19px] w-5 object-contain" />
       ) : (
-        <span className="font-mono text-[11px] font-medium">{tile.label}</span>
+        <span className="font-mono text-[11px] text-white/80">{tile.label}</span>
       )}
     </div>
   )
 }
 
 /**
- * Illustrative portfolio card shown under the hero copy. It is decorative (a
- * picture of the product), so it's hidden from assistive tech.
+ * Illustrative portfolio card shown under the hero copy, in the same tinted
+ * glass as the rest of the hero. Decorative (a picture of the product), so
+ * it's hidden from assistive tech.
  */
 export function PortfolioPreview() {
   const { ready, rotated, slots, leaving, prices, ticks } = useDashboardMotion()
@@ -167,38 +166,38 @@ export function PortfolioPreview() {
   return (
     <div
       aria-hidden
-      className="w-full max-w-[400px] overflow-hidden rounded-[12px] border border-card-border bg-card text-left shadow-[0_30px_80px_-20px_rgb(0_0_0/0.6)]"
+      className={`card-sheen relative w-full max-w-[400px] overflow-hidden rounded-[4px] bg-panel/85 text-left backdrop-blur-[40px] ${glassEdge}`}
     >
-      <div className="intro flex h-[46px] items-center justify-between border-b border-card-rule px-[18px]" style={d(1250)}>
-        <p className="font-sans text-[13px] font-semibold">Portfolio</p>
-        <p className={label}>Illustrative</p>
+      <div className="intro flex h-[56px] items-center justify-between px-5 sm:px-[25px]" style={d(1250)}>
+        <p className="font-serif text-[22px] leading-none font-extralight">Portfolio</p>
+        <p className="font-mono text-[11px] leading-none text-white/40 uppercase">Illustrative</p>
       </div>
+      <div className="hairline draw-x" style={d(1300)} />
 
       <div className="px-5 sm:px-[25px]">
-        <p className={`intro mt-[29px] ${label}`} style={d(1350)}>
+        <p className={`intro mt-[26px] ${label}`} style={d(1350)}>
           Allocation
         </p>
-        <div className="intro mt-[25px] flex items-center gap-4 sm:gap-[27px]" style={d(1450)}>
+        <div className="intro mt-[22px] flex items-center gap-4 sm:gap-[27px]" style={d(1450)}>
           <AllocationDonut progress={progress} />
-          <ul className="min-w-0 flex-1 divide-y divide-card-rule">
+          <ul className="min-w-0 flex-1 divide-y divide-white/10">
             {allocations.map((a) => (
-              <li key={a.label} className="flex h-[35.5px] items-center gap-2.5 text-[13px]">
+              <li key={a.label} className="flex h-[36px] items-center gap-2.5 text-[13px]">
                 <span className={`size-[6px] shrink-0 rounded-full ${a.dot}`} />
-                <span className="flex-1 truncate text-[#b9baba]">{a.label}</span>
-                <span className="font-mono text-[#e8e8e8] tabular-nums">
-                  {(progress * a.share).toFixed(1)}%
-                </span>
+                <span className="flex-1 truncate text-white/60">{a.label}</span>
+                <span className="font-mono text-white tabular-nums">{(progress * a.share).toFixed(1)}%</span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="draw-x mt-[23px] h-px bg-card-rule" style={d(1550)} />
-        <p className={`intro mt-[26px] ${label}`} style={d(1600)}>
+        <div className="hairline draw-x mt-[22px]" style={d(1550)} />
+        <p className={`intro mt-[24px] flex items-center gap-2 ${label}`} style={d(1600)}>
           Holdings
+          <span className="live-dot size-[5px] rounded-full bg-brand" />
         </p>
       </div>
 
-      <ul className="mx-[11px] mt-0.5 divide-y divide-[#202321]">
+      <ul className="mt-2 px-5 sm:px-[25px]">
         {slots.map((poolIndex, slot) => {
           const h = pool[poolIndex]
           if (!h) return null
@@ -206,23 +205,21 @@ export function PortfolioPreview() {
           const tick = ticks.get(h.name)
           const initial = !rotated
           return (
-            <li key={slot} className="h-[65.5px] overflow-hidden">
+            <li key={slot} className={`h-[66px] overflow-hidden ${slot > 0 ? 'border-t border-white/10' : ''}`}>
               <div
                 key={h.name}
-                className={`flex h-full items-center gap-[13px] px-[10.5px] ${
-                  leaving === slot ? 'row-out' : ready ? 'row-in' : 'opacity-0'
-                }`}
+                className={`flex h-full items-center gap-3 ${leaving === slot ? 'row-out' : ready ? 'row-in' : 'opacity-0'}`}
                 style={initial ? d(slot * 140) : undefined}
               >
                 <HoldingTile tile={h.tile} />
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-[15px] leading-[1.3] font-semibold">{h.name}</p>
-                  <p className="mt-[3px] truncate text-[13px] leading-[1.3] text-[#8b8d8c]">{h.detail}</p>
+                  <p className="truncate text-[14px] leading-[1.3]">{h.name}</p>
+                  <p className="mt-[2px] truncate text-[12px] leading-[1.3] text-white/50">{h.detail}</p>
                 </div>
                 {price != null && (
                   <p
                     key={tick?.id ?? 0}
-                    className={`font-mono text-[15px] text-[#e8e8e8] tabular-nums ${tick ? (tick.dir === 'up' ? 'tick-up' : 'tick-down') : ''}`}
+                    className={`font-mono text-[14px] tabular-nums ${tick ? (tick.dir === 'up' ? 'tick-up' : 'tick-down') : ''}`}
                   >
                     ${price.toFixed(2)}
                   </p>
@@ -233,8 +230,9 @@ export function PortfolioPreview() {
         })}
       </ul>
 
-      <div className="intro mt-[7px] flex h-[44px] items-center border-t border-card-rule px-[25px]" style={d(1700)}>
-        <p className={label}>Not an offer or recommendation</p>
+      <div className="hairline draw-x mt-2" style={d(1700)} />
+      <div className="intro flex h-[46px] items-center px-5 sm:px-[25px]" style={d(1700)}>
+        <p className="font-mono text-[11px] leading-none text-white/40 uppercase">Not an offer or recommendation</p>
       </div>
     </div>
   )
