@@ -99,7 +99,7 @@ function useDashboardMotion() {
   return { ready, rotated, slots, leaving, prices, ticks }
 }
 
-const label = 'font-mono text-[11px] leading-none tracking-[0.3em] text-card-muted uppercase'
+const label = 'font-mono text-[11px] leading-none tracking-[0.2em] text-card-muted uppercase sm:tracking-[0.3em]'
 
 /** Donut chart: segments grow from 12 o'clock in step with the count-up. */
 function AllocationDonut({ progress }: { progress: number }) {
@@ -111,7 +111,7 @@ function AllocationDonut({ progress }: { progress: number }) {
   // Each segment starts where the previous one's full share ends.
   const starts = allocations.map((_, i) => allocations.slice(0, i).reduce((sum, a) => sum + (a.share / 100) * c, 0))
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="shrink-0 -rotate-90">
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="size-[72px] shrink-0 -rotate-90 sm:size-[88px]">
       {allocations.map((a, i) => {
         const full = (a.share / 100) * c
         const len = Math.max(0, full * progress - gap)
@@ -174,11 +174,11 @@ export function PortfolioPreview() {
         <p className={label}>Illustrative</p>
       </div>
 
-      <div className="px-[25px]">
+      <div className="px-5 sm:px-[25px]">
         <p className={`intro mt-[29px] ${label}`} style={d(1350)}>
           Allocation
         </p>
-        <div className="intro mt-[25px] flex items-center gap-[27px]" style={d(1450)}>
+        <div className="intro mt-[25px] flex items-center gap-4 sm:gap-[27px]" style={d(1450)}>
           <AllocationDonut progress={progress} />
           <ul className="min-w-0 flex-1 divide-y divide-card-rule">
             {allocations.map((a) => (
