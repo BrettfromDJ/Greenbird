@@ -9,11 +9,10 @@ pnpm dev
 
 ## Fonts
 
-Display type is **Inter Tight**, loaded from Fontsource. Body copy and the
-dashboard title use two licensed faces, **Suisse Intl** and **PP Editorial New**.
-They're first in their font stacks in `app/globals.css`, so they take over once
-the font files are added (for example with `next/font/local`). Until then, Inter
-and Newsreader stand in. Roboto Mono is used as designed.
+Display type is **Inter Tight**, loaded from Fontsource. Body copy uses the
+licensed **Suisse Intl**, first in its font stack in `app/globals.css`, so it
+takes over once the font files are added (for example with `next/font/local`).
+Until then, Inter stands in. Roboto Mono is used as designed.
 
 ## Assets
 

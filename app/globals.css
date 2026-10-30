@@ -1,10 +1,9 @@
 @import 'tailwindcss';
 
 /*
- * Display type is Inter Tight. Body and serif are set in licensed faces
- * (Suisse Intl, PP Editorial New); they're listed first in their stacks so
- * they take over as soon as the font files are added (e.g. via
- * next/font/local). Until then the open fallbacks loaded in layout.tsx stand in.
+ * Display type is Inter Tight. Body copy is set in a licensed face (Suisse
+ * Intl), listed first in its stack so it takes over as soon as the font files
+ * are added (e.g. via next/font/local). Until then Inter stands in.
  */
 @theme {
   --color-ink: #011207;
@@ -24,7 +23,6 @@
 
   --font-display: 'Inter Tight Variable', 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Suisse Intl', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'PP Editorial New', 'Newsreader Variable', ui-serif, Georgia, serif;
   --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, monospace;
   --font-numeric: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
 

@@ -169,7 +169,7 @@ export function PortfolioPreview() {
       className={`card-sheen relative w-full max-w-[400px] overflow-hidden rounded-[4px] bg-panel/85 text-left backdrop-blur-[40px] ${glassEdge}`}
     >
       <div className="intro flex h-[56px] items-center justify-between px-5 sm:px-[25px]" style={d(1250)}>
-        <p className="font-serif text-[22px] leading-none font-extralight">Portfolio</p>
+        <p className="font-display text-[18px] leading-none font-semibold">Portfolio</p>
         <p className="font-mono text-[11px] leading-none text-white/40 uppercase">Illustrative</p>
       </div>
       <div className="hairline draw-x" style={d(1300)} />
