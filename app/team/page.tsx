@@ -1,96 +1,78 @@
 import type { Metadata } from 'next'
 import { d } from '../_components/delay'
-import { IntroDone, Reveal } from '../_components/motion'
-import { Container, DisplayHeading, Eyebrow, PrimaryButton } from '../_components/primitives'
+import { IntroDone } from '../_components/motion'
+import { Container, DisplayHeading, Eyebrow } from '../_components/primitives'
 import { SiteFooter } from '../_components/site-footer'
 import { SiteNav } from '../_components/site-nav'
-import { TeamGrid, type TeamMember } from '../_components/team-grid'
+import { TeamSection, type TeamMember } from '../_components/team-grid'
 
 export const metadata: Metadata = {
   title: 'Team — Greenbird',
   description: 'The people behind Greenbird Capital.',
 }
 
-// Placeholder slots: the live team page couldn't be read from the build
-// environment. Replace with the real names, titles, bios and headshots.
-const members: TeamMember[] = Array.from({ length: 6 }, () => ({
-  name: 'Team Member',
-  role: 'Title',
-  bio: 'Short bio: two or three sentences on background, experience and focus at Greenbird. The full text opens in place when a visitor selects Read bio.',
-}))
+const linkedinSearch = (name: string) =>
+  `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(name)}`
 
-const FIRM_BROKERCHECK = 'https://brokercheck.finra.org/firm/summary/306692'
+// Bios and profile URLs aren't in the design yet; LinkedIn links fall back to a
+// people search until the real profile URLs are supplied.
+const leadership: TeamMember[] = [
+  {
+    name: 'Michael Gestone',
+    role: 'Founder',
+    photo: { src: '/images/team/michael-gestone@2x.png', width: 848, height: 1028 },
+    linkedin: linkedinSearch('Michael Gestone'),
+  },
+  {
+    name: 'Nikolas Costello',
+    role: 'Founder, CEO, COO & CCO',
+    photo: { src: '/images/team/nikolas-costello@2x.png', width: 848, height: 882 },
+    linkedin: linkedinSearch('Nikolas Costello'),
+  },
+]
+
+// The design's "Team" row reuses the founders' names under two other people's
+// photos, so these names and titles are placeholders until the real ones arrive.
+const team: TeamMember[] = [
+  {
+    name: 'Name to come',
+    role: 'Title to come',
+    photo: { src: '/images/team/team-member-03@2x.png', width: 848, height: 758 },
+  },
+  {
+    name: 'Name to come',
+    role: 'Title to come',
+    photo: { src: '/images/team/team-member-04@2x.png', width: 848, height: 980 },
+  },
+]
 
 export default function TeamPage() {
   return (
     <>
       <IntroDone />
-      <div className="relative overflow-hidden bg-hero">
-        <div className="pointer-events-none absolute inset-0 hero-aurora opacity-80" />
-        <Container className="relative pt-[26px]">
-          <SiteNav />
-          <div className="draw-x mt-8 h-px bg-white/10" style={d(250)} />
-        </Container>
-
-        <Container className="relative grid gap-10 pt-[60px] pb-20 lg:grid-cols-[minmax(0,760px)_minmax(0,440px)] lg:items-end lg:justify-between lg:pb-[100px]">
-          <div>
-            <Eyebrow className="intro text-brand" style={d(350)}>
-              Our team
-            </Eyebrow>
-            <DisplayHeading
-              as="h1"
-              motion="intro"
-              delay={450}
-              className="mt-6"
-              lead="The people behind Greenbird."
-              rest="Here when you need them."
-              dimRest
-            />
-          </div>
-          <div className="intro" style={d(750)}>
-            <p className="text-[16px] leading-[1.3] text-white/60">
-              Whether you&apos;re an individual investor or an institution, our team is ready to discuss how Greenbird
-              Capital can support your financial objectives.
-            </p>
-            <a
-              href={FIRM_BROKERCHECK}
-              target="_blank"
-              rel="noreferrer"
-              className="glass glass-tint mt-6 inline-flex items-center gap-3 rounded-[6px] px-4 py-3 font-mono text-[12px] leading-none text-white/80 uppercase transition-colors hover:text-brand"
-            >
-              <span className="live-dot size-[6px] rounded-full bg-brand" />
-              Verify us on FINRA BrokerCheck ↗
-            </a>
-          </div>
-        </Container>
-      </div>
+      <Container className="pt-[26px]">
+        <SiteNav />
+        <div className="draw-x mt-8 h-px bg-white/10" style={d(250)} />
+      </Container>
 
       <main>
-        <Container className="pt-20 pb-24 lg:pt-[100px] lg:pb-[120px]">
-          <Reveal className="mb-10 flex items-end justify-between gap-6 border-b border-line pb-6">
-            <Eyebrow className="r text-white/50">Leadership &amp; team</Eyebrow>
-            <p className="r font-mono text-[12px] leading-[1.3] text-white/50" style={d(100)}>
-              {String(members.length).padStart(2, '0')} people
-            </p>
-          </Reveal>
-          <TeamGrid members={members} />
+        <Container className="grid gap-8 pt-[60px] lg:grid-cols-[minmax(0,600px)_417px] lg:justify-between">
+          <div>
+            <Eyebrow className="intro text-brand" style={d(350)}>
+              Meet Greenbird
+            </Eyebrow>
+            <DisplayHeading as="h1" motion="intro" delay={450} className="mt-6" lead="The people behind" rest="Greenbird" />
+          </div>
+          <p className="intro text-[16px] leading-[1.3] text-white/60 lg:pt-[35px]" style={d(700)}>
+            Whether you&apos;re an individual investor or an institution, our team is ready to discuss how Greenbird
+            Capital can support your financial objectives.
+          </p>
         </Container>
 
-        <section className="border-t border-line-footer">
-          <Container className="py-20 lg:py-[100px]">
-            <Reveal className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-              <div>
-                <Eyebrow className="r text-brand">Get in touch</Eyebrow>
-                <DisplayHeading className="mt-6" delay={100} lead="Start the conversation." rest="We’ll take it from here." dimRest />
-              </div>
-              <div className="r" style={d(300)}>
-                <PrimaryButton href="/contact" size="lg">
-                  Contact the team
-                </PrimaryButton>
-              </div>
-            </Reveal>
-          </Container>
-        </section>
+        <Container className="pt-[60px] pb-[60px]">
+          <TeamSection label="Leadership & team" members={leadership} />
+          {team.length > 0 && <TeamSection label="Team" members={team} />}
+        </Container>
       </main>
 
       <SiteFooter />

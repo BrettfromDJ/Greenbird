@@ -498,21 +498,3 @@
   border: 2px solid var(--color-hero);
   animation: pulse-dot 1.8s ease-out infinite;
 }
-
-/* Team headshots: green-toned to sit in the palette, full colour on hover. */
-.team-photo {
-  filter: grayscale(1) sepia(0.35) hue-rotate(70deg) saturate(1.6) brightness(0.9) contrast(1.05);
-}
-
-.group:hover .team-photo {
-  filter: none;
-}
-
-/* Team portrait panel: the site's 12px dot grid fading up from a green glow. */
-.team-portrait-bg {
-  background:
-    radial-gradient(70% 55% at 50% 105%, rgb(75 222 127 / 0.22), transparent 70%),
-    radial-gradient(circle, rgb(255 255 255 / 0.13) 1px, transparent 1.5px) 0 0 / 12px 12px;
-  -webkit-mask-image: linear-gradient(to top, #000 15%, rgb(0 0 0 / 0.35) 75%, transparent);
-  mask-image: linear-gradient(to top, #000 15%, rgb(0 0 0 / 0.35) 75%, transparent);
-}
