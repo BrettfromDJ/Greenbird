@@ -12,7 +12,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Investment solutions',
     links: [
-      { label: 'Private Equity', href: '/#private-equity' },
+      { label: 'Private Equity', href: '/private-equity' },
       { label: 'Market-Linked Notes', href: '/#market-linked-notes' },
     ],
   },

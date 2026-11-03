@@ -498,3 +498,46 @@
   border: 2px solid var(--color-hero);
   animation: pulse-dot 1.8s ease-out infinite;
 }
+
+/* Private equity: company marquee. Each track holds its list twice, so
+   sliding it by half its width loops seamlessly. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 60s linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+  animation-duration: 70s;
+}
+
+.marquee-fade:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Sparklines draw themselves in (paths use pathLength="1"). */
+@keyframes spark-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.spark-draw {
+  stroke-dasharray: 1;
+  animation: spark-draw 1.4s var(--ease-expo) both;
+  animation-delay: var(--d, 0ms);
+}
+

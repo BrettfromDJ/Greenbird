@@ -15,7 +15,7 @@ const solutions = [
     title: ['Before the', 'opening bell'],
     body: 'Explore private companies defining their industries, accessed through our affiliated Fund + Series LLC structure. Available to accredited investors.',
     cta: 'Discover private equity',
-    href: '#private-equity',
+    href: '/private-equity',
     dots: '/images/dots-private-equity@2x.png',
     arrow: '/images/icon-arrow-up-right-sm.svg',
     theme: {
