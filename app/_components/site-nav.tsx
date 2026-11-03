@@ -6,7 +6,7 @@ import { PrimaryButton } from './primitives'
 const links = [
   { label: 'Private Equity', href: '/#private-equity' },
   { label: 'Market-Linked Notes', href: '/#market-linked-notes' },
-  { label: 'Team', href: '/#team' },
+  { label: 'Team', href: '/team' },
   { label: 'Contact', href: '/contact' },
 ]
 
