@@ -34,7 +34,7 @@ const solutions = [
     title: ['Market, on', 'different terms'],
     body: 'Senior unsecured debt from major financial institutions, with returns linked to an underlying asset or index. Explore a different approach to market exposure.',
     cta: 'Discover market-linked notes',
-    href: '#market-linked-notes',
+    href: '/market-linked-notes',
     dots: '/images/dots-market-linked-notes@2x.png',
     arrow: '/images/icon-arrow-up-right-sm-dark.svg',
     theme: {

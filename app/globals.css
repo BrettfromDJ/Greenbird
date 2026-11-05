@@ -541,3 +541,47 @@
 .spotlight:hover::before {
   opacity: 1;
 }
+
+/* Market-linked notes: payoff lines draw in when their <Reveal> scope enters
+   (paths use pathLength="1"). */
+@keyframes stroke-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.r-stroke {
+  stroke-dasharray: 1;
+}
+
+[data-armed]:not([data-in]) .r-stroke {
+  stroke-dashoffset: 1;
+}
+
+[data-in] .r-stroke {
+  animation: stroke-draw 1.6s var(--ease-expo) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Autocallable note card: observation dates light up in turn on a loop
+   (12 ticks x 0.3s = one 3.6s pass). */
+@keyframes obs-chase {
+  0% {
+    background-color: var(--color-brand);
+    box-shadow: 0 0 12px rgb(75 222 127 / 0.55);
+  }
+  35%,
+  100% {
+    background-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+  }
+}
+
+.obs-tick {
+  background-color: rgb(255 255 255 / 0.1);
+  animation: obs-chase 3.6s ease-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.3s + 1.8s);
+}
