@@ -17,12 +17,11 @@ type Holding = { name: string; detail: string; price: number | null; tile: Tile 
 
 // Illustrative holdings for the product preview. The first three match the
 // design; the rest rotate in so the panel feels live. Marks are placeholders.
-// Shield AI and Saronic use monograms until their logo files are supplied.
 const pool: Holding[] = [
   { name: 'Anduril Industries', detail: 'Private equity', price: 135.25, tile: { kind: 'logo', src: '/images/logo-anduril.svg' } },
-  { name: 'Shield AI', detail: 'Private equity', price: 171.83, tile: { kind: 'text', label: 'S' } },
+  { name: 'Shield AI', detail: 'Private equity', price: 171.83, tile: { kind: 'logo', src: '/images/logos/pe/shield-ai.png' } },
   { name: 'Autocallable note', detail: '3-yr worst-of autocallable · BNP Paribas', price: null, tile: { kind: 'text', label: 'BNP' } },
-  { name: 'Saronic Technologies', detail: 'Private equity', price: 74.18, tile: { kind: 'text', label: 'S' } },
+  { name: 'Saronic Technologies', detail: 'Private equity', price: 74.18, tile: { kind: 'logo', src: '/images/logos/pe/saronic.png' } },
   { name: 'Buffered note', detail: '2-yr S&P 500 buffer · Goldman Sachs', price: null, tile: { kind: 'text', label: 'GS' } },
   { name: 'Databricks', detail: 'Private equity', price: 96.4, tile: { kind: 'logo', src: '/images/logos/databricks.svg' } },
   { name: 'Digital note', detail: '18-mo Nasdaq-100 digital · J.P. Morgan', price: null, tile: { kind: 'text', label: 'JPM' } },
